@@ -1,46 +1,48 @@
-# Download Wazuh repos:
+**# Download Wazuh repos:**
 git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.7.5 --depth=1
-cd wazuh-kubernetes
+cd wazuh-kubernetes folder
 
-# Setup SSL certificates for wazuh indexer and dashboard:
+
+**# Setup SSL certificates for wazuh indexer and dashboard:**
 The below genereated certificates are imported via secretGenerator on the kustomization.yml file.
 
 1. Generate self-signed certificates for the Wazuh indexer cluster using the script to the same directory
 cd wazuh/certs/indexer_cluster
 ./generate_certs.sh .
-ls ---> to verify is the certs are generated
-
+Verify if the certificates are generated
 
 2. Generate self-signed certificates for the Wazuh dashboard cluster using the script to the same directory
-cd dashboard_http
+Navigate to /dashboard_http folder
 ./generate_certs.sh .
-ls ---> to verify is the certs are generated
+Verify if the certificates are generated
 
 
-# Setup storage class for AKS Cluster:
+**# Setup storage class for AKS Cluster:**
 kubectl get sc --- check if azue storage class for managed disk is present.
 cd envs/local-env
 vi storage_class_wazuh.yaml
 kubectl get sc  --> check the newly created storage class.
 
-# Apply all manifests using kustomize:
-cd
+
+**# Deploy Wazuh to AKS cluster:**
 kubectl apply -k envs/local-env/
 
-# Verify if all wazuh k8s objects are created:
+
+**# Deployment Verfication:**
 kubectl get namespaces | grep wazuh
 kubectl get services -n wazuh
 kubectl get deployments -n wazuh
 kubectl get statefulsets -n wazuh
 kubectl get pods -n wazuh
 
-#Accessing Wazuh Dashboard:
-kubectl get services -o wide -n wazuh
-https://<lb_svc_ip>:443
-Go to Advanced to access the website
-The default credentials are admin:SecretPassword
 
-# Change the password of Wazuh users:
+**#Accessing Wazuh Dashboard:**
+kubectl get services -o wide -n wazuh
+Access the Wazuh dashboard : https://<lb_svc_ip>:443
+Use the default credentials to login to Wazuh dashboard
+
+
+**# Change the default passwords:**
 1. Change password for Wazuh indexer users
 
 kubectl exec -it wazuh-indexer-0 -n wazuh -- /bin/bash
@@ -58,10 +60,8 @@ echo -n "NewPassword" | base64 ---- copy the new encoded password
 Edit the indexer or dashbboard secrets configuration file as follows. Replace the value of the password field with your new encoded password.
 move to wazuh folder
 cd secrets
-
 vi indexer-cred-secret.yaml
 Replace the old password in this file with the new encoded password
-
 vi dashboard-cred-secret.yaml
 Replace the old password in this file with the new encoded password
 
@@ -84,8 +84,9 @@ wait for the indexer to initialize properly before running the script.
 bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
 
 7. Login with the new credentials on the Wazuh dashboard
+8. 
 
-# Wazuh API users
+**# Change password for Wazuh user:**
 The wazuh-wui user is the user to connect with the Wazuh API by default. Follow these steps to change the password.
 
 1. Encode your new password in base64 format.

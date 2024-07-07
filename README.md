@@ -31,8 +31,7 @@ https://documentation.wazuh.com/current/deployment-options/deploying-with-kubern
   c. Applying the changes:
   d. Start a bash shell in <wazuh-indexer-0> once more
   e. Set the required variables in the <wazuh-indexer-0> pod.
-  f. Run the "securityadmin.sh" to apply all the above changes from within the <wazuh-indexer-0> container. Wait for the indexer to initialize properly before running the script.
-     bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh -cd /usr/share/wazuh-indexer/opensearch-security/ -nhnv -cacert  $CACERT -cert $CERT -key $KEY -p 9200 -icl -h $NODE_NAME
+  f. Run the "securityadmin.sh" to apply all the above changes from within the <wazuh-indexer-0> container. Wait for the indexer to initialize properly before running the bash script.
   g. Login with the new credentials on the Wazuh dashboard
 
 **8. Change password for Wazuh user:**

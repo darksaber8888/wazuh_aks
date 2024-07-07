@@ -1,12 +1,12 @@
 **Steps to Install Wazuh on AKS Cluster**
-Refer to the official link:
-https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html
+  Refer to the official link:
+  https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html
 
 **1. Download Wazuh repos:**
      git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.7.5 --depth=1
 
 **2. Setup SSL certificates for wazuh indexer and dashboard:**
-     The below genereated certificates are imported via secretGenerator on the kustomization.yml file.
+  The below genereated certificates are imported via secretGenerator on the kustomization.yml file.
   a. Generate self-signed certificates for the Wazuh indexer cluster using the script to the same directory
   b. Generate self-signed certificates for the Wazuh dashboard cluster using the script to the same directory
 
@@ -35,7 +35,7 @@ https://documentation.wazuh.com/current/deployment-options/deploying-with-kubern
   g. Login with the new credentials on the Wazuh dashboard
 
 **8. Change password for Wazuh user:**
-     The wazuh-wui user is the user to connect with the Wazuh API by default. 
+  The wazuh-wui user is the user to connect with the Wazuh API by default. 
   a. Encode your new password in base64 format.
   b. Replace the new password in place of the old password in the <wazuh-api-cred-secret.yaml> file.  
   c. Apply the changes with the kustomization file. 

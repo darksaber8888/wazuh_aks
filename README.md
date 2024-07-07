@@ -1,5 +1,5 @@
-**Steps to Install Wazuh on AKS Cluster**
-  _Refer to the official link:_ https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html
+**Steps to Install Wazuh on AKS Cluster: **
+  ** * Refer to the official link:** https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html
 
 **1. Download Wazuh repos:**
      git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.7.5 --depth=1
